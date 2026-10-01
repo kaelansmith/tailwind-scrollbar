@@ -22,7 +22,8 @@
     "**/next-env.d.ts",
     "**/public/**",
     "**/assets/**",
-    "src/*.d.ts"
+    "src/*.d.ts",
+    "website/**"
   ],
   "singleQuote": true,
   "trailingComma": "es5"
