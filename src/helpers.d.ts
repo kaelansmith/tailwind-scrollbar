@@ -1,3 +1,7 @@
+declare const _exports: {
+    importDefault: typeof importDefault;
+};
+export = _exports;
 /**
  * Gets the underlying default import of a module.
  *
@@ -8,7 +12,7 @@
  * @param {T | { __esModule: unknown, default: T }} mod The module
  * @returns {T} The bare export
  */
-export function importDefault<T>(mod: T | {
+declare const importDefault: <T>(mod: T | {
     __esModule: unknown;
     default: T;
-}): T;
+}) => T;

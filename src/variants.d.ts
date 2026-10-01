@@ -1,3 +1,8 @@
+declare const _exports: {
+    addVariantOverrides: typeof addVariantOverrides;
+};
+export = _exports;
+import typedefs = require('./typedefs');
 export type VariantOverride = {
     /**
      * - The variant name as it appears in the utitlity
@@ -23,5 +28,4 @@ export type VariantOverride = {
  *
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
-export function addVariantOverrides({ addVariant, config }: typedefs.TailwindPlugin): void;
-import typedefs = require("./typedefs");
+declare const addVariantOverrides: ({ addVariant, config }: typedefs.TailwindPlugin) => void;
