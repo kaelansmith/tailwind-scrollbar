@@ -4,16 +4,21 @@ const {
   addBaseSizeUtilities,
   addColorUtilities,
   addRoundedUtilities,
-  addSizeUtilities
+  addSizeUtilities,
 } = require('./utilities');
 const { addVariantOverrides } = require('./variants');
 
-module.exports = plugin.withOptions((options = {}) => tailwind => {
+module.exports = plugin.withOptions((options = {}) => (tailwind) => {
   let preferredStrategy = options.preferredStrategy ?? 'standard';
 
-  if (preferredStrategy !== 'standard' && preferredStrategy !== 'pseudoelements') {
+  if (
+    preferredStrategy !== 'standard' &&
+    preferredStrategy !== 'pseudoelements'
+  ) {
     // eslint-disable-next-line no-console
-    console.warn('WARNING: tailwind-scrollbar preferredStrategy should be \'standard\' or \'pseudoelements\'');
+    console.warn(
+      "WARNING: tailwind-scrollbar preferredStrategy should be 'standard' or 'pseudoelements'"
+    );
     preferredStrategy = 'standard';
   }
 

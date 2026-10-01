@@ -7,6 +7,7 @@ sidebar_position: 2
 ## Installation
 
 1. Add the package to your project
+
 ```bash
 # npm
 npm install --save-dev tailwind-scrollbar
@@ -20,11 +21,11 @@ pnpm add -D tailwind-scrollbar
 
 ```javascript
 module.exports = {
+  // ...
+  plugins: [
     // ...
-    plugins: [
-        // ...
-        require('tailwind-scrollbar'),
-    ],
+    require("tailwind-scrollbar"),
+  ],
 };
 ```
 
@@ -36,11 +37,11 @@ By default, only utilities that can have expressions across browsers are availab
 
 ```javascript
 module.exports = {
+  // ...
+  plugins: [
     // ...
-    plugins: [
-        // ...
-        require('tailwind-scrollbar')({ nocompatible: true }),
-    ],
+    require("tailwind-scrollbar")({ nocompatible: true }),
+  ],
 };
 ```
 
@@ -50,11 +51,11 @@ The default scrollbar strategy used by the plugin is to prefer the standards-tra
 
 ```javascript
 module.exports = {
+  // ...
+  plugins: [
     // ...
-    plugins: [
-        // ...
-        require('tailwind-scrollbar')({ preferredStrategy: 'pseudoelements' }),  // default: 'standard'
-    ],
+    require("tailwind-scrollbar")({ preferredStrategy: "pseudoelements" }), // default: 'standard'
+  ],
 };
 ```
 

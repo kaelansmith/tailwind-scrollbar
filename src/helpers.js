@@ -9,8 +9,8 @@
  * @returns {T} The bare export
  */
 // eslint-disable-next-line no-underscore-dangle
-const importDefault = mod => (mod && mod.__esModule ? mod.default : mod);
+const importDefault = (mod) => (mod && mod.__esModule ? mod.default : mod);
 
 module.exports = {
-  importDefault
+  importDefault,
 };

@@ -13,8 +13,10 @@ It's a good idea to start with an element that already has a scrollbar. Begin cu
 </div>
 
 ```html
-<div class="scrollbar scrollbar-thumb-sky-700 scrollbar-track-sky-300 h-32 overflow-y-scroll">
-    <div class="h-64 bg-slate-400"></div>
+<div
+  class="scrollbar scrollbar-thumb-sky-700 scrollbar-track-sky-300 h-32 overflow-y-scroll"
+>
+  <div class="h-64 bg-slate-400"></div>
 </div>
 ```
 
@@ -30,11 +32,11 @@ The scollbar colour utilities are inherited, so if you want to use the same colo
 
 ```html
 <html className="scrollbar-thumb-sky-700 scrollbar-track-sky-300">
-    <!-- ... -->
-    <div className="scrollbar-thin h-32 overflow-y-scroll">
-        <div className="h-64 bg-slate-400"></div>
-    </div>
-    <!-- ... -->
+  <!-- ... -->
+  <div className="scrollbar-thin h-32 overflow-y-scroll">
+    <div className="h-64 bg-slate-400"></div>
+  </div>
+  <!-- ... -->
 </html>
 ```
 
@@ -49,8 +51,10 @@ All browsers are compatible with `dark:` variants.
 </div>
 
 ```html
-<div class="hover:scrollbar-thumb-sky-500 active:scrollbar-thumb-sky-400 h-32 scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-scroll">
-    <div class="h-64 bg-slate-400"></div>
+<div
+  class="hover:scrollbar-thumb-sky-500 active:scrollbar-thumb-sky-400 h-32 scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-scroll"
+>
+  <div class="h-64 bg-slate-400"></div>
 </div>
 ```
 
@@ -63,24 +67,26 @@ The colour utilities can accept colours in any format Tailwind's native colour u
 </div>
 
 ```html
-<div class="scrollbar-thumb-custom scrollbar-track-custom-light hover:scrollbar-thumb-[#059669] active:scrollbar-thumb-emerald-500/50 scrollbar h-32 overflow-y-scroll">
-    <div class="h-64 bg-slate-400"></div>
+<div
+  class="scrollbar-thumb-custom scrollbar-track-custom-light hover:scrollbar-thumb-[#059669] active:scrollbar-thumb-emerald-500/50 scrollbar h-32 overflow-y-scroll"
+>
+  <div class="h-64 bg-slate-400"></div>
 </div>
 ```
 
 ```javascript title="tailwind.config.js"
 module.exports = {
-    // ...
-    theme: {
-        extend: {
-            colors: {
-                custom: {
-                    DEFAULT: '#10B981',
-                    light: '#D1FAE5',
-                },
-            },
+  // ...
+  theme: {
+    extend: {
+      colors: {
+        custom: {
+          DEFAULT: "#10B981",
+          light: "#D1FAE5",
         },
+      },
     },
+  },
 };
 ```
 
@@ -93,14 +99,16 @@ When you have both a vertical and horizontal scrollbar, you'll end up with an em
 </div>
 
 ```html
-<div class="scrollbar-corner-sky-500 scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 h-32 overflow-scroll">
-    <div class="h-64 w-[100vw] bg-slate-400"></div>
+<div
+  class="scrollbar-corner-sky-500 scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 h-32 overflow-scroll"
+>
+  <div class="h-64 w-[100vw] bg-slate-400"></div>
 </div>
 ```
 
 ## Rounded bars
 
-*These utilities only work in `nocompatible` mode, and have no effect in Firefox. See [configuration](/getting-started#configuration).*
+_These utilities only work in `nocompatible` mode, and have no effect in Firefox. See [configuration](/getting-started#configuration)._
 
 The `scrollbar-*-rounded-*` family of utilities can be applied to the `thumb`, `track`, or `corner` components, and work in the same was as Tailwind's native `rounded-*` utilities. Custom values and arbitrary values are permitted.
 
@@ -109,14 +117,16 @@ The `scrollbar-*-rounded-*` family of utilities can be applied to the `thumb`, `
 </div>
 
 ```html
-<div class="scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 h-32 overflow-y-scroll">
-    <div class="h-64 bg-slate-400"></div>
+<div
+  class="scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 h-32 overflow-y-scroll"
+>
+  <div class="h-64 bg-slate-400"></div>
 </div>
 ```
 
 ## Custom sizes
 
-*These utilities only work in `nocompatible` mode, and have no effect in Firefox. See [configuration](/getting-started#configuration).*
+_These utilities only work in `nocompatible` mode, and have no effect in Firefox. See [configuration](/getting-started#configuration)._
 
 The `scrollbar-w-*` and `scrollbar-h-*` utilities can be used to fine-tine the width and height of scrollbars. Note that these only have effects on vertical and horizontal scrollbars, respectively, and can only be used with the `scrollbar` utility (not `scrollbar-thin`).
 
@@ -125,7 +135,9 @@ The `scrollbar-w-*` and `scrollbar-h-*` utilities can be used to fine-tine the w
 </div>
 
 ```html
-<div class="scrollbar-w-8 scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 h-32 overflow-y-scroll">
-    <div class="h-64 bg-slate-400"></div>
+<div
+  class="scrollbar-w-8 scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 h-32 overflow-y-scroll"
+>
+  <div class="h-64 bg-slate-400"></div>
 </div>
 ```

@@ -4,31 +4,31 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './docusaurus.config.js',
-    './src/**/*.{js,jsx,ts,tsx}',
-    './docs/*.{md,mdx}'
+    "./docusaurus.config.js",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./docs/*.{md,mdx}",
   ],
-  darkMode: ['class', '[data-theme="dark"]'],
+  darkMode: ["class", '[data-theme="dark"]'],
   corePlugins: {
-    preflight: false
+    preflight: false,
   },
   theme: {
     extend: {
       colors: {
         custom: {
-          DEFAULT: '#10B981',
-          light: '#D1FAE5'
-        }
-      }
-    }
+          DEFAULT: "#10B981",
+          light: "#D1FAE5",
+        },
+      },
+    },
   },
   plugins: [
-    require('tailwind-scrollbar')({
+    require("tailwind-scrollbar")({
       nocompatible: true,
-      preferredStrategy: 'pseudoelements'
+      preferredStrategy: "pseudoelements",
     }),
-    require('tailwindcss/plugin')(({ addVariant }) => {
-      addVariant('self-dark', '[data-theme="dark"]&');
-    })
-  ]
+    require("tailwindcss/plugin")(({ addVariant }) => {
+      addVariant("self-dark", '[data-theme="dark"]&');
+    }),
+  ],
 };

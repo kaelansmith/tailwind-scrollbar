@@ -14,10 +14,12 @@ const scrollbarPlugin = require('..');
 const generateTailwindCss = async (config = {}) => {
   const { currentTestName } = expect.getState();
 
-  const result = await postcss(tailwindcss(config))
-    .process('@tailwind utilities;', {
-      from: `${path.resolve(__filename)}?test=${currentTestName}`
-    });
+  const result = await postcss(tailwindcss(config)).process(
+    '@tailwind utilities;',
+    {
+      from: `${path.resolve(__filename)}?test=${currentTestName}`,
+    }
+  );
 
   return result.css;
 };
@@ -30,14 +32,17 @@ const generateTailwindCss = async (config = {}) => {
  * @returns {Promise<string>} The CSS generated from the plugin using the provided config
  */
 const generatePluginCss = async (config = {}, options = {}) => {
-  const tailwindConfig = _.merge({
-    plugins: [scrollbarPlugin(options)]
-  }, config);
+  const tailwindConfig = _.merge(
+    {
+      plugins: [scrollbarPlugin(options)],
+    },
+    config
+  );
 
   return generateTailwindCss(tailwindConfig);
 };
 
 module.exports = {
   generateTailwindCss,
-  generatePluginCss
+  generatePluginCss,
 };

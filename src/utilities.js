@@ -19,7 +19,7 @@ const COMPONENTS = ['track', 'thumb', 'corner'];
 const scrollbarProperties = (properties, preferPseudoElements) => {
   if (preferPseudoElements) {
     return {
-      '@supports (-moz-appearance:none)': properties
+      '@supports (-moz-appearance:none)': properties,
     };
   }
 
@@ -35,10 +35,13 @@ const scrollbarProperties = (properties, preferPseudoElements) => {
  */
 const addBaseStyles = ({ addBase }, preferredStrategy) => {
   addBase({
-    '*': scrollbarProperties({
-      'scrollbar-color': 'initial',
-      'scrollbar-width': 'initial'
-    }, preferredStrategy === 'pseudoelements')
+    '*': scrollbarProperties(
+      {
+        'scrollbar-color': 'initial',
+        'scrollbar-width': 'initial',
+      },
+      preferredStrategy === 'pseudoelements'
+    ),
   });
 };
 
@@ -49,22 +52,33 @@ const addBaseStyles = ({ addBase }, preferredStrategy) => {
  * @returns {Record<string, unknown>} - The generated CSS
  */
 const generateBaseUtilities = () => ({
-  ...Object.fromEntries(COMPONENTS.map(component => {
-    const base = `&::-webkit-scrollbar-${component}`;
+  ...Object.fromEntries(
+    COMPONENTS.map((component) => {
+      const base = `&::-webkit-scrollbar-${component}`;
 
-    return [
-      [base, {
-        'background-color': `var(--scrollbar-${component})`,
-        'border-radius': `var(--scrollbar-${component}-radius)`
-      }],
-      [`${base}:hover`, {
-        'background-color': `var(--scrollbar-${component}-hover, var(--scrollbar-${component}))`
-      }],
-      [`${base}:active`, {
-        'background-color': `var(--scrollbar-${component}-active, var(--scrollbar-${component}-hover, var(--scrollbar-${component})))`
-      }]
-    ];
-  }).flat())
+      return [
+        [
+          base,
+          {
+            'background-color': `var(--scrollbar-${component})`,
+            'border-radius': `var(--scrollbar-${component}-radius)`,
+          },
+        ],
+        [
+          `${base}:hover`,
+          {
+            'background-color': `var(--scrollbar-${component}-hover, var(--scrollbar-${component}))`,
+          },
+        ],
+        [
+          `${base}:active`,
+          {
+            'background-color': `var(--scrollbar-${component}-active, var(--scrollbar-${component}-hover, var(--scrollbar-${component})))`,
+          },
+        ],
+      ];
+    }).flat()
+  ),
 });
 
 /**
@@ -79,41 +93,52 @@ const generateBaseUtilities = () => ({
 const generateScrollbarSizeUtilities = ({ preferPseudoElements }) => ({
   '.scrollbar': {
     ...generateBaseUtilities(),
-    ...scrollbarProperties({
-      'scrollbar-width': 'auto',
-      'scrollbar-color': 'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)'
-    }, preferPseudoElements),
+    ...scrollbarProperties(
+      {
+        'scrollbar-width': 'auto',
+        'scrollbar-color':
+          'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)',
+      },
+      preferPseudoElements
+    ),
 
     '&::-webkit-scrollbar': {
       display: 'block',
       width: 'var(--scrollbar-width, 16px)',
-      height: 'var(--scrollbar-height, 16px)'
-    }
+      height: 'var(--scrollbar-height, 16px)',
+    },
   },
 
   '.scrollbar-thin': {
     ...generateBaseUtilities(),
-    ...scrollbarProperties({
-      'scrollbar-width': 'thin',
-      'scrollbar-color': 'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)'
-    }, preferPseudoElements),
+    ...scrollbarProperties(
+      {
+        'scrollbar-width': 'thin',
+        'scrollbar-color':
+          'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)',
+      },
+      preferPseudoElements
+    ),
 
     '&::-webkit-scrollbar': {
       display: 'block',
       width: '8px',
-      height: '8px'
-    }
+      height: '8px',
+    },
   },
 
   '.scrollbar-none': {
-    ...scrollbarProperties({
-      'scrollbar-width': 'none'
-    }, preferPseudoElements),
+    ...scrollbarProperties(
+      {
+        'scrollbar-width': 'none',
+      },
+      preferPseudoElements
+    ),
 
     '&::-webkit-scrollbar': {
-      display: 'none'
-    }
-  }
+      display: 'none',
+    },
+  },
 });
 
 /**
@@ -124,22 +149,25 @@ const generateScrollbarSizeUtilities = ({ preferPseudoElements }) => ({
 const addColorUtilities = ({ matchUtilities, theme }) => {
   const themeColors = theme('scrollbarColor') ?? theme('colors');
   const colors = Object.fromEntries(
-    Object.entries(flattenColorPalette(themeColors)).map(([k, v]) => [k, toColorValue(v)])
+    Object.entries(flattenColorPalette(themeColors)).map(([k, v]) => [
+      k,
+      toColorValue(v),
+    ])
   );
 
-  COMPONENTS.forEach(component => {
+  COMPONENTS.forEach((component) => {
     matchUtilities(
       {
-        [`scrollbar-${component}`]: value => {
+        [`scrollbar-${component}`]: (value) => {
           const color = toColorValue(value);
           return {
-            [`--scrollbar-${component}`]: `${color} !important`
+            [`--scrollbar-${component}`]: `${color} !important`,
           };
-        }
+        },
       },
       {
         values: colors,
-        type: 'color'
+        type: 'color',
       }
     );
   });
@@ -152,15 +180,15 @@ const addColorUtilities = ({ matchUtilities, theme }) => {
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
 const addRoundedUtilities = ({ theme, matchUtilities }) => {
-  COMPONENTS.forEach(component => {
+  COMPONENTS.forEach((component) => {
     matchUtilities(
       {
-        [`scrollbar-${component}-rounded`]: value => ({
-          [`--scrollbar-${component}-radius`]: value
-        })
+        [`scrollbar-${component}-rounded`]: (value) => ({
+          [`--scrollbar-${component}-radius`]: value,
+        }),
       },
       {
-        values: theme('borderRadius')
+        values: theme('borderRadius'),
       }
     );
   });
@@ -172,9 +200,11 @@ const addRoundedUtilities = ({ theme, matchUtilities }) => {
  *    scrollbar styling strategy: standards track or pseudoelements
  */
 const addBaseSizeUtilities = ({ addUtilities }, preferredStrategy) => {
-  addUtilities(generateScrollbarSizeUtilities({
-    preferPseudoElements: preferredStrategy === 'pseudoelements'
-  }));
+  addUtilities(
+    generateScrollbarSizeUtilities({
+      preferPseudoElements: preferredStrategy === 'pseudoelements',
+    })
+  );
 };
 
 /**
@@ -183,14 +213,17 @@ const addBaseSizeUtilities = ({ addUtilities }, preferredStrategy) => {
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
 const addSizeUtilities = ({ matchUtilities, theme }) => {
-  ['width', 'height'].forEach(dimension => {
-    matchUtilities({
-      [`scrollbar-${dimension[0]}`]: value => ({
-        [`--scrollbar-${dimension}`]: value
-      })
-    }, {
-      values: theme(dimension)
-    });
+  ['width', 'height'].forEach((dimension) => {
+    matchUtilities(
+      {
+        [`scrollbar-${dimension[0]}`]: (value) => ({
+          [`--scrollbar-${dimension}`]: value,
+        }),
+      },
+      {
+        values: theme(dimension),
+      }
+    );
   });
 };
 
@@ -199,5 +232,5 @@ module.exports = {
   addBaseSizeUtilities,
   addColorUtilities,
   addRoundedUtilities,
-  addSizeUtilities
+  addSizeUtilities,
 };

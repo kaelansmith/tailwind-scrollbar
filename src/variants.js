@@ -21,7 +21,7 @@ const variants = [
   'focus-visible',
   'active',
   'enabled',
-  'disabled'
+  'disabled',
 ];
 
 /**
@@ -32,7 +32,11 @@ const variants = [
  * @returns {string} The variant format string
  */
 const getDefaultFormat = (variant, config) => {
-  if (variant === 'hover' && flagEnabled && flagEnabled(config(), 'hoverOnlyWhenSupported')) {
+  if (
+    variant === 'hover' &&
+    flagEnabled &&
+    flagEnabled(config(), 'hoverOnlyWhenSupported')
+  ) {
     return '@media (hover: hover) and (pointer: fine) { &:hover }';
   }
 
@@ -48,7 +52,11 @@ const getDefaultFormat = (variant, config) => {
  * @returns {string} The variant format string
  */
 const getScrollbarFormat = (variant, config) => {
-  if (variant === 'hover' && flagEnabled && flagEnabled(config(), 'hoverOnlyWhenSupported')) {
+  if (
+    variant === 'hover' &&
+    flagEnabled &&
+    flagEnabled(config(), 'hoverOnlyWhenSupported')
+  ) {
     return '@media (hover: hover) and (pointer: fine) { & }';
   }
 
@@ -67,13 +75,13 @@ const getScrollbarFormat = (variant, config) => {
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
 const addVariantOverrides = ({ addVariant, config }) => {
-  variants.forEach(variant => {
+  variants.forEach((variant) => {
     addVariant(variant, ({ container }) => {
       const suffix = `-${variant}`;
       let found = false;
 
-      container.walkRules(rule => {
-        rule.walkDecls(/^--scrollbar-/, decl => {
+      container.walkRules((rule) => {
+        rule.walkDecls(/^--scrollbar-/, (decl) => {
           found = true;
           if (!decl.prop.endsWith(suffix)) {
             /* eslint-disable-next-line no-param-reassign */
@@ -92,5 +100,5 @@ const addVariantOverrides = ({ addVariant, config }) => {
 };
 
 module.exports = {
-  addVariantOverrides
+  addVariantOverrides,
 };
